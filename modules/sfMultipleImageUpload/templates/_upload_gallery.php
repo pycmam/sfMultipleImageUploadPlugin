@@ -11,7 +11,7 @@
 use_helper('JavascriptBase');
 
 use_stylesheet('/sfMultipleImageUploadPlugin/css/style.css');
-use_javascript('jquery/jquery-ui.min.js');
+use_javascript('/sfMultipleImageUploadPlugin/js/jquery/jquery-ui.min.js');
 use_javascript('/sfMultipleImageUploadPlugin/js/swfupload/swfupload.js');
 use_javascript('/sfMultipleImageUploadPlugin/js/swfupload/swfupload.queue.js');
 
