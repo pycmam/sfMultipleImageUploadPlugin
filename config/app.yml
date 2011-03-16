@@ -1,0 +1,8 @@
+all:
+
+  thumbnail:
+    types:
+      uploaded_preview:
+        mimetype: image/jpeg
+        macro:
+          Replica_Macro_ThumbnailFixed: [90, 90, center, center]
