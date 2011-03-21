@@ -15,12 +15,15 @@ use_javascript('/sfMultipleImageUploadPlugin/js/jquery/jquery-ui.min.js');
 use_javascript('/sfMultipleImageUploadPlugin/js/swfupload/swfupload.js');
 use_javascript('/sfMultipleImageUploadPlugin/js/swfupload/swfupload.queue.js');
 
+$types = sfConfig::get('app_sf_image_uploader_types');
+$config = $types[$type];
+$formClass = $config['image_model'] .'Form';
 ?>
 
 <?php include_partial('sfMultipleImageUpload/upload_init.js', array(
     'object' => $object,
-    'routePrefix' => $routePrefix,
-    'form' => $form,
+    'routePrefix' => $type,
+    'form' => new $formClass,
 )); ?>
 
 <div id="image_upload_gallery">
@@ -48,7 +51,7 @@ use_javascript('/sfMultipleImageUploadPlugin/js/swfupload/swfupload.queue.js');
                 update: function(e, ui) {
                     var serial = $(e.target).sortable('serialize', { key: 'order[]' });
                     var options = {
-                        url: '". url_for($routePrefix.'_image_sort', $object) ."',
+                        url: '". url_for($type.'_image_sort', $object) ."',
                         type: 'POST',
                         data: serial
                     };
@@ -62,7 +65,7 @@ use_javascript('/sfMultipleImageUploadPlugin/js/swfupload/swfupload.queue.js');
         <?php foreach ($object->getImages() as $image): ?>
             <?php include_partial('sfMultipleImageUpload/upload_preview', array(
                 'image'   => $image,
-                'routePrefix' => $routePrefix,
+                'routePrefix' => $type,
                 'object'  => $object,
             )); ?>
         <?php endforeach; ?>

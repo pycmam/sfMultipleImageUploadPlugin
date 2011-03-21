@@ -1,5 +1,12 @@
 all:
 
+#  sf_image_uploader:
+#    routes_register: true
+#    types:
+#      offer:
+#        object_model: Offer
+#        image_model: OfferImage
+
   thumbnail:
     types:
       uploaded_preview:
