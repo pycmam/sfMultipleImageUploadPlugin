@@ -19,8 +19,9 @@ $display = isset($display) ? (string) $display : 'block';
     </div>
 
     <?php echo jq_link_to_remote('Удалить', array(
-        'url'      => url_for($routePrefix . '_image_delete', $image),
-        'csrf'     => 1,
-        'success'  => jq_visual_effect('fadeOut', '#uploaded_image_'.$image->getId(), array('speed' => 'slow')),
+        'url'       => url_for($routePrefix . '_image_delete', $image),
+        'csrf'      => 1,
+        'sf_method' => 'delete',
+        'success'   => jq_visual_effect('fadeOut', '#uploaded_image_'.$image->getId(), array('speed' => 'slow')),
     ), array('class' => 'delete')); ?>
 </li>

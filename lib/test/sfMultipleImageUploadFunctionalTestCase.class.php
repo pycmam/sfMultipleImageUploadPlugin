@@ -20,14 +20,22 @@ abstract class sfMultipleImageUploadFunctionalTestCase extends myFunctionalTestC
      */
     abstract protected function getObject();
 
+
+    /**
+     * Ссылка на галерею
+     */
+    abstract protected function getGalleryUrl($object);
+
     protected
         $images = null,
         $type = null,
         $config = null;
 
 
-    protected function _start()
+    protected function setUp()
     {
+        parent::setUp();
+
         $this->images = $this->getImages();
         $this->type = $this->getTypeName();
 
@@ -103,7 +111,7 @@ abstract class sfMultipleImageUploadFunctionalTestCase extends myFunctionalTestC
 
         $this->browser
             ->setHttpHeader('X-Requested-With', 'XMLHttpRequest')
-            ->call($this->generateUrl($this->type.'_image_delete', $images[0]), 'post', array('_with_csrf' => 1))
+            ->call($this->generateUrl($this->type.'_image_delete', $images[0]), 'delete', array('_with_csrf' => 1))
             ->with('response')->isStatusCode(200)
             ->with('model')->begin()
                 ->check($this->config['image_model'], array(
@@ -144,5 +152,27 @@ abstract class sfMultipleImageUploadFunctionalTestCase extends myFunctionalTestC
 
             $this->assertEquals($params, $object->getImages()->getPrimaryKeys());
         }
+    }
+
+
+    /**
+     * Галерея
+     */
+    public function testAutoGallery()
+    {
+        $object = $this->getObject();
+        $images = $this->_makeFixtures($object);
+
+        $tester = $this->browser
+            ->get($this->getGalleryUrl($object))
+            ->with('response')->begin()
+                ->checkElement('#image_upload_gallery', true)
+                ->checkElement('#uploaded_image_list li', count($images));
+
+        foreach ($images as $image) {
+            $tester->checkElement('#uploaded_image_'.$image->getId(), 1);
+        }
+
+        $tester->end();
     }
 }

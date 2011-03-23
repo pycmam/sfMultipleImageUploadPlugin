@@ -77,6 +77,7 @@ class sfMultipleImageUploadActions extends sfActions
      */
     public function executeDelete(sfWebRequest $request)
     {
+        $request->checkCSRFProtection();
         $this->forward404Unless($request->isXmlHttpRequest());
 
         $image = $this->getRoute()->getObject();

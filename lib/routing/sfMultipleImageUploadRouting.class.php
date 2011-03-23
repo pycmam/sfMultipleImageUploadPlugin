@@ -19,21 +19,21 @@ class sfMultipleImageUploadRouting
         foreach ($types as $name => $config) {
 
             // upload
-            $routing->prependRoute($name .'_image_upload', new sfDoctrineRoute(sprintf('/%s/image/upload/:id', $name),
+            $routing->prependRoute($name .'_image_upload', new sfDoctrineRoute(sprintf('/%s/:id/images/upload', $name),
                 array('module' => 'sfMultipleImageUpload', 'action' => 'upload', 'prefix' => $name),
                 array('id' => '\d+', 'sf_method' => 'post'),
                 array('model' => $config['object_model'], 'type' => 'object')
             ));
 
             // delete
-            $routing->prependRoute($name .'_image_delete', new sfDoctrineRoute(sprintf('/%s/image/delete/:id', $name),
+            $routing->prependRoute($name .'_image_delete', new sfDoctrineRoute(sprintf('/%s/image/:id/delete', $name),
                 array('module' => 'sfMultipleImageUpload', 'action' => 'delete'),
-                array('id' => '\d+', 'sf_method' => 'post'),
+                array('id' => '\d+', 'sf_method' => 'delete'),
                 array('model' => $config['image_model'], 'type' => 'object')
             ));
 
             // sort
-            $routing->prependRoute($name .'_image_sort', new sfDoctrineRoute(sprintf('/%s/image/sort/:id', $name),
+            $routing->prependRoute($name .'_image_sort', new sfDoctrineRoute(sprintf('/%s/:id/images/sort', $name),
                 array('module' => 'sfMultipleImageUpload', 'action' => 'sort'),
                 array('id' => '\d+', 'sf_method' => 'post'),
                 array('model' => $config['object_model'], 'type' => 'object', 'image_model' => $config['image_model'])
