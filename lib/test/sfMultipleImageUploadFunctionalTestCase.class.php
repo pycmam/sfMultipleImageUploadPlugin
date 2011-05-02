@@ -74,11 +74,10 @@ abstract class sfMultipleImageUploadFunctionalTestCase extends myFunctionalTestC
         $form = new $formClass;
         $url = $this->generateUrl($this->type .'_image_upload', $object);
 
+        $params = sfConfig::get('sf_csrf_secret') ? array($form->getCsrfFieldName() => $form->getCsrfToken()) : array();
         $this->browser
             ->uploadFiles(array($form->getName() => array('path' => $this->images[0])))
-            ->post($url, array($form->getName() => array(
-                $form->getCsrfFieldName() => $form->getCsrfToken(),
-            )))
+            ->post($url, array($form->getName() => $params))
                 ->with('request')->checkModuleAction('sfMultipleImageUpload', 'upload')
                 ->with('form')->hasErrors(false)
                 ->with('response')->isStatusCode(200)

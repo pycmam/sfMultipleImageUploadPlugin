@@ -120,7 +120,9 @@ var upload = new function() {
             upload_url: "<?php echo url_for($routePrefix . '_image_upload', $object) ?>?<?php echo ini_get('session.name') ?>=<?php echo session_id() ?>",
             file_post_name: "<?php echo $form->getName() ?>[path]",
             post_params: {
-              '<?php echo $form->getName() ?>[_csrf_token]': "<?php echo $form->getCSRFToken(); ?>"
+              <?php if (sfConfig::get('sf_csrf_secret')): ?>
+                '<?php echo $form->getName() ?>[_csrf_token]': "<?php echo $form->getCSRFToken(); ?>"
+              <?php endif; ?>
             },
 
             file_size_limit : "<?php echo $form->getValidator('path')->getOption('max_size') / 1024 / 1024 ?> MB",
