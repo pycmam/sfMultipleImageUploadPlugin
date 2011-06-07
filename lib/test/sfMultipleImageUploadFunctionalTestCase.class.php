@@ -174,4 +174,21 @@ abstract class sfMultipleImageUploadFunctionalTestCase extends myFunctionalTestC
 
         $tester->end();
     }
+
+
+    protected function copyFileAndGetPath($source)
+    {
+        $filename = basename($source);
+        $dir = sfConfig::get('sf_cache_dir') . DIRECTORY_SEPARATOR .
+                       $this->app . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR .
+                       'fixtures' . DIRECTORY_SEPARATOR . 'files';
+
+        if (! file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        copy($source, $destination = $dir . DIRECTORY_SEPARATOR . $filename);
+
+        return $destination;
+    }
 }
