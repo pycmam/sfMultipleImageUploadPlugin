@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Behaviour: Sortable
+ * Behaviour: exSortable
  *
  * Options:
  *   - mode       - append|prepend TODO: replace with sort order (asc|desc)
  *   - key_column - ключевая колонка для сортировки, id по-умолчанию
  */
-class Doctrine_Template_Sortable extends Doctrine_Template
+class Doctrine_Template_exSortable extends Doctrine_Template
 {
     const MODE_APPEND  = 'append';
     const MODE_PREPEND = 'prepend';
@@ -18,7 +18,7 @@ class Doctrine_Template_Sortable extends Doctrine_Template
      */
     public function setTableDefinition()
     {
-        $listener = new Doctrine_Template_Sortable_Listener;
+        $listener = new Doctrine_Template_exSortable_Listener;
 
         $column = array(
             'type'     => 'integer',
@@ -82,7 +82,7 @@ class Doctrine_Template_Sortable extends Doctrine_Template
 /**
  * Listener
  */
-class Doctrine_Template_Sortable_Listener extends Doctrine_Record_Listener
+class Doctrine_Template_exSortable_Listener extends Doctrine_Record_Listener
 {
 
     /**
@@ -95,7 +95,7 @@ class Doctrine_Template_Sortable_Listener extends Doctrine_Record_Listener
         if (!$query->isSubquery() && !$query->contains('ORDER BY') && $query->getDqlPart('limit') != array(1)) {
             $params = $event->getParams();
 
-            if (Doctrine_Template_Sortable::MODE_PREPEND == $this->getOption('mode')) {
+            if (Doctrine_Template_exSortable::MODE_PREPEND == $this->getOption('mode')) {
                 $query->orderBy(sprintf('%s.sort', $params['alias']));
             } else {
 

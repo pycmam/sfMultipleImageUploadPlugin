@@ -1,7 +1,7 @@
 Image:
   actAs:
     Timestampable: ~
-    Sortable: ~
+    exSortable: ~
   columns:
     object_id: { type: integer,     notnull: true }
     size:      { type: integer(8),  notnull: true }

@@ -33,7 +33,7 @@ $formClass = $config['image_model'] .'Form';
     <?php else: ?>
         <div id="upload_button_cont">
             <div id="upload_button"></div>
-            <div class="help">Для добавления щелкните кнопку.<br />Вы выбрать несколько фотографий. Форматы снимков &mdash; JPG, PNG, GIF.</div>
+            <div class="help">Для добавления щелкните кнопку.<br />Вы можете выбрать сразу несколько изображений. Форматы: JPG, PNG, GIF.</div>
         </div>
 
         <div id="upload_progress">
