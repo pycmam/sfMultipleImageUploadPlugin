@@ -22,14 +22,14 @@ class sfMultipleImageUploadRouting
             $routing->prependRoute($name .'_image_upload', new sfDoctrineRoute(sprintf('/%s/:id/images/upload', $name),
                 array('module' => 'sfMultipleImageUpload', 'action' => 'upload', 'prefix' => $name),
                 array('id' => '\d+', 'sf_method' => 'post'),
-                array('model' => $config['object_model'], 'type' => 'object')
+                array('model' => $config['object_model'], 'type' => 'object', 'image_model' => $config['image_model'])
             ));
 
             // delete
             $routing->prependRoute($name .'_image_delete', new sfDoctrineRoute(sprintf('/%s/image/:id/delete', $name),
                 array('module' => 'sfMultipleImageUpload', 'action' => 'delete'),
                 array('id' => '\d+', 'sf_method' => 'delete'),
-                array('model' => $config['image_model'], 'type' => 'object')
+                array('model' => $config['image_model'], 'type' => 'object', 'image_model' => $config['image_model'])
             ));
 
             // sort
@@ -37,6 +37,20 @@ class sfMultipleImageUploadRouting
                 array('module' => 'sfMultipleImageUpload', 'action' => 'sort'),
                 array('id' => '\d+', 'sf_method' => 'post'),
                 array('model' => $config['object_model'], 'type' => 'object', 'image_model' => $config['image_model'])
+            ));
+
+            // titles
+            $routing->prependRoute($name .'_image_title', new sfDoctrineRoute(sprintf('/%s/:id/images/title', $name),
+                array('module' => 'sfImageTitle', 'action' => 'index', 'conf' => $name),
+                array('id' => '\d+', 'sf_method' => 'get'),
+                array('model' => $config['object_model'], 'type' => 'object')
+            ));
+
+            // save titles
+            $routing->prependRoute($name .'_image_title_save', new sfDoctrineRoute(sprintf('/%s/:id/images/title', $name),
+                array('module' => 'sfImageTitle', 'action' => 'save', 'conf' => $name),
+                array('id' => '\d+', 'sf_method' => 'post'),
+                array('model' => $config['object_model'], 'type' => 'object')
             ));
 
         }

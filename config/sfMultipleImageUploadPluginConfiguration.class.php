@@ -12,7 +12,7 @@ class sfMultipleImageUploadPluginConfiguration extends sfPluginConfiguration
     {
         if (sfConfig::get('app_sf_image_uploader_routes_register', true)) {
             $enabledModules = sfConfig::get('sf_enabled_modules', array());
-            if (in_array('sfMultipleImageUpload', $enabledModules)) {
+            if (in_array('sfMultipleImageUpload', $enabledModules) || in_array('sfImageTitle', $enabledModules)) {
                 $this->dispatcher->connect('routing.load_configuration', array('sfMultipleImageUploadRouting', 'listenToRoutingLoadConfigurationEvent'));
             }
         }

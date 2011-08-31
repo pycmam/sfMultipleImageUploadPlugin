@@ -3,6 +3,7 @@ Image:
     Timestampable: ~
     exSortable: ~
   columns:
+    title:     { type: string(255) }
     object_id: { type: integer,     notnull: true }
     size:      { type: integer(8),  notnull: true }
     type:      { type: string(16),  notnull: true }
