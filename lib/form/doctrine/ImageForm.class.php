@@ -3,6 +3,6 @@
 /**
  * Форма для загрузки изображения
  */
-abstract class ImageForm extends BaseFormDoctrine
+abstract class ImageForm extends PluginImageForm
 {
 }
