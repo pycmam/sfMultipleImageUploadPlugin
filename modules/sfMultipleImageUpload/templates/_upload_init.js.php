@@ -8,7 +8,7 @@
 ?>
 <script type="text/javascript">
 /* <![CDATA[ */
-var upload = new function() {
+var upload_<?php echo $routePrefix; ?> = new function() {
 
   function _construct() {
 
@@ -27,10 +27,10 @@ var upload = new function() {
     };
 
     this.resetProgress = function() {
-        $('#upload_progress .total').text(0);
-        $('#upload_progress .count').text(0);
-        $('#upload_progress .persents').text('0%');
-        $('#error_list li').remove();
+        $('#upload_progress_<?php echo $routePrefix; ?> .total').text(0);
+        $('#upload_progress_<?php echo $routePrefix; ?> .count').text(0);
+        $('#upload_progress_<?php echo $routePrefix; ?> .persents').text('0%');
+        $('#error_list_<?php echo $routePrefix; ?> li').remove();
     };
 
     /**
@@ -38,9 +38,9 @@ var upload = new function() {
      */
     this.fileDialogComplete = function(numFilesSelected, numFilesQueued) {
         if (numFilesSelected > 0) {
-            upload.resetProgress();
-            $('#upload_progress .total').text(numFilesQueued);
-            $('#upload_progress').show();
+            upload_<?php echo $routePrefix; ?>.resetProgress();
+            $('#upload_progress_<?php echo $routePrefix; ?> .total').text(numFilesQueued);
+            $('#upload_progress_<?php echo $routePrefix; ?>').show();
 
             this.startUpload();
         }
@@ -55,37 +55,37 @@ var upload = new function() {
      * старт загрузки файла
      */
     this.uploadStart = function(file) {
-        var count = parseInt($('#upload_progress .count').text())+1;
-        $('#upload_progress .count').text(count);
+        var count = parseInt($('#upload_progress_<?php echo $routePrefix; ?> .count').text())+1;
+        $('#upload_progress_<?php echo $routePrefix; ?> .count').text(count);
     };
 
     /**
      * прогресс загрузки
      */
     this.uploadProgress = function(file, bytesLoaded, bytesTotal) {
-        $('#upload_progress .percents').text(Math.round(bytesLoaded / (bytesTotal / 100)) + '%');
+        $('#upload_progress_<?php echo $routePrefix; ?> .percents').text(Math.round(bytesLoaded / (bytesTotal / 100)) + '%');
     };
 
     /**
      * ошибка загрузки
      */
     this.uploadError = function(file, errorCode, message) {
-        $('#error_list').append('<li>' + file.name + ': ' + upload.errors[errorCode]);
+        $('#error_list_<?php echo $routePrefix; ?>').append('<li>' + file.name + ': ' + upload_<?php echo $routePrefix; ?>.errors[errorCode]);
     };
 
     /**
      * ошибка добавления в очередь
      */
     this.fileQueueError = function(file, errorCode, message) {
-        $('#error_list').append('<li>' + file.name + ': ' + upload.errors[errorCode]);
+        $('#error_list_<?php echo $routePrefix; ?>').append('<li>' + file.name + ': ' + upload_<?php echo $routePrefix; ?>.errors[errorCode]);
     };
 
     /**
      * загрузка завершена успешно
      */
     this.uploadSuccess = function(file, response) {
-        $('#uploaded_image_list').append(response);
-        $('#uploaded_image_list li:last-child').fadeIn('slow');
+        $('#uploaded_image_list_<?php echo $routePrefix; ?>').append(response);
+        $('#uploaded_image_list_<?php echo $routePrefix; ?> li:last-child').fadeIn('slow');
     };
 
     /**
@@ -97,17 +97,17 @@ var upload = new function() {
      * все файлы очереди загружены
      */
     this.queueComplete = function() {
-        $('#upload_progress').hide();
-        //upload.resetProgress();
+        $('#upload_progress_<?php echo $routePrefix; ?>').hide();
+        //upload_<?php echo $routePrefix; ?>.resetProgress();
     };
 
     /**
      * отмена всей очереди
      */
     this.cancelQueue = function() {
-        upload.swfu.cancelQueue();
-        upload.resetProgress();
-        $('#upload_progress').hide();
+        upload_<?php echo $routePrefix; ?>.swfu.cancelQueue();
+        upload_<?php echo $routePrefix; ?>.resetProgress();
+        $('#upload_progress_<?php echo $routePrefix; ?>').hide();
         alert('Загрузка отменена');
     };
 
@@ -135,7 +135,7 @@ var upload = new function() {
             button_image_url: "/sfMultipleImageUploadPlugin/images/upload-button.png",
             button_width: "120",
             button_height: "29",
-            button_placeholder_id: "upload_button",
+            button_placeholder_id: "upload_button_<?php echo $routePrefix; ?>",
             button_text: '<span class="upload_button">Выбрать файлы...</span>',
             button_text_style: ".upload_button { font-family: tahoma; font-size: 11pt; }",
             button_text_left_padding: 15,
@@ -162,7 +162,7 @@ var upload = new function() {
 };
 
 $(function(){
-  upload.init();
+  upload_<?php echo $routePrefix; ?>.init();
 });
 /* ]]> */
 </script>

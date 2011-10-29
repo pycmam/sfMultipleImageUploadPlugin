@@ -18,8 +18,16 @@ class sfMultipleImageUploadActions extends sfActions
      */
     public function executeUpload(sfWebRequest $request)
     {
+        $prefix = $request->getParameter('prefix');
+        $configs = sfConfig::get('app_sf_image_uploader_types');
+        $config = $configs[$prefix];
+
+        $imagesRelationName = isset($config['images_relation'])
+          ? $config['images_relation']
+          : 'Images';
+
         $object = $this->getRoute()->getObject();
-        $relation = $object->getTable()->getRelation('Images');
+        $relation = $object->getTable()->getRelation($imagesRelationName);
         $objectSetter = 'set' . get_class($object);
 
         $imageClass = $relation->getClass();

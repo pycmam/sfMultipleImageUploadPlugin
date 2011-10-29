@@ -6,6 +6,7 @@ all:
 #      offer:
 #        object_model: Offer
 #        image_model: OfferImage
+#        images_relation: Images
 
   thumbnail:
     types:

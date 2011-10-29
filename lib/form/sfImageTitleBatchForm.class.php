@@ -13,7 +13,13 @@ class sfImageTitleBatchForm extends sfForm
     {
         $this->object = $object;
 
-        $images = $object->getImages();
+        $configs = sfConfig::get('app_sf_image_uploader_types');
+
+        $imagesRelation = isset($configs[$options['conf']]['images_relation'])
+          ? $configs[$options['conf']]['images_relation']
+          : 'Images';
+
+        $images = $object->{'get'.$imagesRelation}();
         $this->images = myToolkit::arrayGroup($images, 'id', false, false);
         $defaults = myToolkit::arrayGroup($images, 'id', 'title', false);
 

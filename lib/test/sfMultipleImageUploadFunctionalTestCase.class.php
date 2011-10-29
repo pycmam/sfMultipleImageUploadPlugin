@@ -29,18 +29,23 @@ abstract class sfMultipleImageUploadFunctionalTestCase extends myFunctionalTestC
     protected
         $images = null,
         $type = null,
-        $config = null;
+        $config = null,
+        $imagesRelation = null;
 
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->images = $this->getImages();
         $this->type = $this->getTypeName();
-
         $types = sfConfig::get('app_sf_image_uploader_types');
         $this->config = $types[$this->type];
+
+        $this->imagesRelation = isset($this->config['images_relation'])
+          ? $this->config['images_relation']
+          : 'Images';
+
+        $this->images = $this->getImages();
     }
 
     /**
@@ -84,7 +89,7 @@ abstract class sfMultipleImageUploadFunctionalTestCase extends myFunctionalTestC
                 ->with('response')->checkElement('li .uploaded_preview img');
 
         $object->refresh();
-        $object->refreshRelated('Images');
+        $object->refreshRelated($this->imagesRelation);
 
         $this->browser
             ->with('model')->check($this->config['image_model'], array(
@@ -147,9 +152,9 @@ abstract class sfMultipleImageUploadFunctionalTestCase extends myFunctionalTestC
                 )))
                 ->with('response')->isStatusCode(200);
 
-            $object->refreshRelated('Images');
+            $object->refreshRelated($this->imagesRelation);
 
-            $this->assertEquals($params, $object->getImages()->getPrimaryKeys());
+            $this->assertEquals($params, $object->{'get'.$this->imagesRelation}()->getPrimaryKeys());
         }
     }
 
@@ -165,11 +170,11 @@ abstract class sfMultipleImageUploadFunctionalTestCase extends myFunctionalTestC
         $tester = $this->browser
             ->get($this->getGalleryUrl($object))
             ->with('response')->begin()
-                ->checkElement('#image_upload_gallery', true)
-                ->checkElement('#uploaded_image_list li', count($images));
+                ->checkElement('#image_upload_gallery_'.$this->type, true)
+                ->checkElement('#uploaded_image_list_'.$this->type.' li', count($images));
 
         foreach ($images as $image) {
-            $tester->checkElement('#uploaded_image_'.$image->getId(), 1);
+            $tester->checkElement('#uploaded_image_'.$this->type.'_'.$image->getId(), 1);
         }
 
         $tester->end();
