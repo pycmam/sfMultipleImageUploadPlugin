@@ -1,14 +1,26 @@
 <?php
 /**
  * Форма редактирования заголовков картинок
- * 
+ *
  * @param ImageTitleBatchForm $form
  */
 use_helper('Replica');
 ?>
 
+<style type="text/css">
+#sf_admin_container .sf_admin_form_row {
+  overflow: hidden;
+  }
+#sf_admin_container .sf_admin_form_row .content {
+  padding-left: 10em;
+}
+#sf_admin_container .sf_admin_form_row .content input[type=text] {
+  width: 400px;
+  }
+</style>
+
 <div id="sf_admin_container">
-    <h1>Картинки для "<?php echo $form->getObject(); ?>"</h1>
+    <h1>Изображения для "<?php echo $form->getObject(); ?>"</h1>
 
     <?php include_partial('sfImageTitle/flashes'); ?>
 
@@ -24,6 +36,8 @@ use_helper('Replica');
             'object' => $form->getObject(),
             'type' => $conf,
         )); ?>
+
+        <h1>Названия изображений</h1>
 
         <div class="sf_admin_form">
             <form action="<?php echo url_for($conf.'_image_title_save', $form->getObject()); ?>" method="post">

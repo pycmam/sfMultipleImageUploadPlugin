@@ -11,8 +11,9 @@ class sfImageTitleActions extends sfActions
     public function executeIndex(sfWebRequest $request)
     {
         $object = $this->getRoute()->getObject();
-        $this->conf = $request->getParameter('conf');
-        $this->form = new sfImageTitleBatchForm($object, array('type' => $this->conf));
+        $options = $this->getRoute()->getOptions();
+        $this->conf = $options['config'];
+        $this->form = new sfImageTitleBatchForm($object, array('conf' => $this->conf));
     }
 
     /**

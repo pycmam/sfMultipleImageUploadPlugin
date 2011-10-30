@@ -14,3 +14,8 @@ all:
         mimetype: image/jpeg
         macro:
           Replica_Macro_ThumbnailFixed: [90, 90, center, center]
+      preview_for_title:
+        mimetype: image/jpeg
+        quality: 80
+        macro:
+          Replica_Macro_ThumbnailFixed: [120, 80]

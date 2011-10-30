@@ -28,6 +28,8 @@ $imagesRelation = isset($config['images_relation']) ? $config['images_relation']
 )); ?>
 
 <div class="image_upload_gallery" id="image_upload_gallery_<?php echo $type; ?>">
+    <div class="title">Загрузка изображений</div>
+
     <?php if ($object->isNew()): ?>
         <p>Загрузка изображений будет доступна после сохранения.</p>
 
@@ -44,7 +46,7 @@ $imagesRelation = isset($config['images_relation']) ? $config['images_relation']
         <ul class="error_list" id="error_list_<?php echo $type; ?>">
         </ul>
 
-        <div class="uploaded-title">Добавленные изображения</div>
+        <div class="title">Добавленные изображения</div>
 
         <?php echo javascript_tag("
         $(function(){
@@ -71,5 +73,10 @@ $imagesRelation = isset($config['images_relation']) ? $config['images_relation']
             )); ?>
         <?php endforeach; ?>
         </ul>
+
+        <?php if ($sf_params->get('module') != 'sfImageTitle' && in_array('sfImageTitle', sfConfig::get('sf_enabled_modules'))): ?>
+          <?php echo link_to('Редактировать названия изображений', $type.'_image_title', $object); ?>
+        <?php endif; ?>
+
     <?php endif ?>
 </div>

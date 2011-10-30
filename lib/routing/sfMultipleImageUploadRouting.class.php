@@ -41,16 +41,16 @@ class sfMultipleImageUploadRouting
 
             // titles
             $routing->prependRoute($name .'_image_title', new sfDoctrineRoute(sprintf('/%s/:id/images/title', $name),
-                array('module' => 'sfImageTitle', 'action' => 'index', 'conf' => $name),
+                array('module' => 'sfImageTitle', 'action' => 'index'),
                 array('id' => '\d+', 'sf_method' => 'get'),
-                array('model' => $config['object_model'], 'type' => 'object')
+                array('model' => $config['object_model'], 'type' => 'object', 'config' => $name)
             ));
 
             // save titles
             $routing->prependRoute($name .'_image_title_save', new sfDoctrineRoute(sprintf('/%s/:id/images/title', $name),
-                array('module' => 'sfImageTitle', 'action' => 'save', 'conf' => $name),
+                array('module' => 'sfImageTitle', 'action' => 'save'),
                 array('id' => '\d+', 'sf_method' => 'post'),
-                array('model' => $config['object_model'], 'type' => 'object')
+                array('model' => $config['object_model'], 'type' => 'object', 'config' => $name)
             ));
 
         }

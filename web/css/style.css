@@ -1,5 +1,26 @@
 
+.image_upload_gallery {
+  overflow: hidden;
+  text-align: left !important;
+  font-size: 100%;
+  }
+
+.image_upload_gallery .title {
+  font-size: 14pt;
+  margin: 10px 0 10px;
+  }
+
+.image_upload_gallery .upload_button_cont,
 .upload_progress {
+  padding: 0 10px 10px 10px;
+  border: 1px solid #ddd;
+  background: #E7EEF6;
+  width: 600px;
+  }
+
+.upload_progress {
+    background: #ffc1c1;
+    padding: 10px;
     display: none;
     }
 
@@ -60,8 +81,3 @@
 .swfupload {
     margin: 15px 0 5px 0;
     }
-
-.image_upload_gallery .uploaded-title {
-  font-size: 14pt;
-  margin: 10px 0 5px 0;
-  }

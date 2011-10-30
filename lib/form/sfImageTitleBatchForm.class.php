@@ -20,8 +20,8 @@ class sfImageTitleBatchForm extends sfForm
           : 'Images';
 
         $images = $object->{'get'.$imagesRelation}();
-        $this->images = myToolkit::arrayGroup($images, 'id', false, false);
-        $defaults = myToolkit::arrayGroup($images, 'id', 'title', false);
+        $this->images = $this->arrayGroup($images, 'id');
+        $defaults = $this->arrayGroup($images, 'id', 'title');
 
         parent::__construct($defaults, $options, $CSRFSecret);
     }
@@ -64,5 +64,18 @@ class sfImageTitleBatchForm extends sfForm
     public function getImages()
     {
         return $this->images;
+    }
+
+    protected function arrayGroup($list, $key, $value = null)
+    {
+      $result = array();
+      foreach ($list as $item) {
+        if ($value) {
+          $result[$item[$key]] = $item[$value];
+        } else {
+          $result[$item[$key]] = $item;
+        }
+      }
+      return $result;
     }
 }
