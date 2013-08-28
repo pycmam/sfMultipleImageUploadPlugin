@@ -48,7 +48,7 @@ use_helper('Replica');
                         <?php echo $form[$id]->renderError(); ?>
                         <div>
                             <label>
-                                <?php echo thumbnail('preview_for_title', new myUploadImageProxy($image->getPath())); ?>
+                                <?php echo thumbnail('preview_for_title', new myUploadProxy($image->getPath())); ?>
                             </label>
                             <div class="content">
                                 <?php echo $form[$id]; ?>

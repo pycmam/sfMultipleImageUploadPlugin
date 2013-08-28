@@ -52,7 +52,8 @@ $imagesRelation = isset($config['images_relation']) ? $config['images_relation']
         $(function(){
             $('#uploaded_image_list_".$type."').sortable({
                 update: function(e, ui) {
-                    var serial = $(e.target).sortable('serialize', { key: 'order[]' });
+                    var serial = $('#uploaded_image_list_".$type."').sortable('serialize', { key: 'order[]' });
+
                     var options = {
                         url: '". url_for($type.'_image_sort', $object) ."',
                         type: 'POST',
