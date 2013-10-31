@@ -20,7 +20,10 @@ abstract class PluginImageForm extends BaseImageForm
         ));
 
         $this->setValidators(array(
-            'path' => new sfValidatorFile(array('mime_types' => 'web_images', 'max_size' => 1024*1024*10)),
+            'path' => new sfValidatorFile(array(
+                'mime_types' => 'web_images',
+                'max_size' => sfConfig::get('app_sf_image_uploader_max_upload_size', 1024*1024*15),
+            )),
         ));
 
         $this->widgetSchema->setNameFormat('image[%s]');

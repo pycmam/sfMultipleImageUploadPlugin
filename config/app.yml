@@ -1,6 +1,7 @@
 all:
 
 #  sf_image_uploader:
+#    max_upload_size: 10485760 # 10Mb
 #    routes_register: true
 #    types:
 #      offer:

@@ -46,10 +46,10 @@
             margin-bottom: 3px;
             }
 
-    .uploaded_image_list a.delete {
-        background: url('/sfDoctrinePlugin/images/delete.png') no-repeat scroll 0 0 transparent !important;
-        padding-left: 20px;
-        }
+    /*.uploaded_image_list a.delete {*/
+        /*background: url('/sfDoctrinePlugin/images/delete.png') no-repeat scroll 0 0 transparent !important;*/
+        /*padding-left: 20px;*/
+        /*}*/
 
 .image_upload_gallery .upload_progress {
     margin: 10px 0 0 0;

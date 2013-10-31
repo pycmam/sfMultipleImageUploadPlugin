@@ -53,9 +53,12 @@ class sfMultipleImageUploadActions extends sfActions
 
         // Вернуть ошибку
         } else {
+            $errors = '';
             foreach ($form->getErrorSchema() as $name => $e) {
-                echo $name, ":", $e->getMessage(), PHP_EOL;
+                $errors .= $name. ": ". $e->getMessage(). PHP_EOL;
             }
+
+            $this->getContext()->getLogger()->log($errors, sfLogger::INFO);
 
             $this->getResponse()->setStatusCode(400);
             return sfView::HEADER_ONLY;
