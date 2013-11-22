@@ -41,10 +41,6 @@ abstract class PluginImageForm extends BaseImageForm
      */
     protected function processUploadedFile($field, $filename = null, $values = null)
     {
-        if (is_null($values)) {
-            $values = $this->values;
-        }
-
         $image = $this->getObject();
         $file  = $this->getValue($field);
 

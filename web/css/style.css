@@ -10,13 +10,17 @@
   margin: 10px 0 10px;
   }
 
-.image_upload_gallery .upload_button_cont,
 .upload_progress {
   padding: 0 10px 10px 10px;
   border: 1px solid #ddd;
   background: #E7EEF6;
   width: 600px;
   }
+
+.image_upload_gallery .upload_button_cont,
+.upload_progress {
+    width: 600px;
+}
 
 .upload_progress {
     background: #ffc1c1;

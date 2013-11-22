@@ -28,13 +28,13 @@ $imagesRelation = isset($config['images_relation']) ? $config['images_relation']
 )); ?>
 
 <div class="image_upload_gallery" id="image_upload_gallery_<?php echo $type; ?>">
-    <div class="title">Загрузка изображений</div>
+    <h3>Загрузка изображений</h3>
 
     <?php if ($object->isNew()): ?>
         <p>Загрузка изображений будет доступна после сохранения.</p>
 
     <?php else: ?>
-        <div class="upload_button_cont" id="upload_button_cont_<?php echo $type; ?>">
+        <div class="upload_button_cont well" id="upload_button_cont_<?php echo $type; ?>">
             <div id="upload_button_<?php echo $type; ?>"></div>
             <div class="help">Для добавления щелкните кнопку.<br />Вы можете выбрать сразу несколько изображений. Форматы: JPG, PNG, GIF.</div>
         </div>
